@@ -1,6 +1,7 @@
 import { Grid, Header, Form, Segment, Button } from "semantic-ui-react";
 import { useMutation } from "@tanstack/react-query";
 import { mutationLogin } from "./mutation";
+import { useNavigate } from "react-router-dom";
 
 export const Auth = () => {
   const { data, mutate } = useMutation({
@@ -8,8 +9,12 @@ export const Auth = () => {
     mutationFn: mutationLogin,
   });
 
+  const navigate = useNavigate();
+
   const handleLogin = async () => {
     await mutate();
+    localStorage.setItem("guest_session_id", data.guest_session_id);
+    navigate("/");
   };
 
   return (
