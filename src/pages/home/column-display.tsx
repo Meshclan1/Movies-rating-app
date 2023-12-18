@@ -1,4 +1,4 @@
-import { Grid, Card, Form } from "semantic-ui-react";
+import { Grid, Card, Form, Label } from "semantic-ui-react";
 import { DisplayType } from ".";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -15,15 +15,17 @@ interface DisplayData {
   name?: string;
   vote_average: number;
   release_date: string;
+  rating?: number;
 }
 
 interface Props {
   data: DisplayData[];
   displayType: DisplayType;
+  isRated: boolean;
 }
 
 export const ColumnDisplay = (props: Props) => {
-  const { data, displayType } = props;
+  const { data, displayType, isRated } = props;
   const [rating, setRating] = useState<number>(0);
 
   const onSuccess = () => {
@@ -68,6 +70,7 @@ export const ColumnDisplay = (props: Props) => {
               }/${displayData.id}`}
             >
               <Card
+                style={{ height: 820 }}
                 fluid
                 image={`https://image.tmdb.org/t/p/original/${displayData.poster_path}
 `}
@@ -80,6 +83,13 @@ export const ColumnDisplay = (props: Props) => {
                 description={displayData.overview.slice(0, 350) + "..."}
               />
             </Link>
+
+            {isRated && (
+              <Label style={{ marginTop: 10 }} color="green">
+                {" "}
+                Your Rating: {displayData.rating}{" "}
+              </Label>
+            )}
 
             <Form style={{ marginTop: 10 }}>
               <Form.Group inline>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchRatedMovies, fetchRatedTvShows } from "./query";
 import { ColumnDisplay } from "../home/column-display";
+import { Navigate } from "react-router-dom";
 
 export const Rated = () => {
   const [activeTabs, setActiveTabs] = useState<DisplayType>(DisplayType.Movies);
@@ -20,6 +21,10 @@ export const Rated = () => {
 
   if (isLoadingRatedMovies || isLoadingRatedTvShows) {
     return <Loader active />;
+  }
+
+  if (localStorage.getItem("guest_session_id") === null) {
+    return <Navigate to="/auth" />;
   }
 
   return (
@@ -45,6 +50,7 @@ export const Rated = () => {
             <ColumnDisplay
               data={ratedMovies.results}
               displayType={DisplayType.Movies}
+              isRated
             />
           </div>
         ) : (
@@ -53,6 +59,7 @@ export const Rated = () => {
             <ColumnDisplay
               data={ratedTvShows.results}
               displayType={DisplayType.TvShows}
+              isRated
             />
           </div>
         )}
