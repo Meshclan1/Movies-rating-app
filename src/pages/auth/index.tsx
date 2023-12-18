@@ -19,9 +19,10 @@ export const Auth = () => {
 
   return (
     <Grid textAlign="center" verticalAlign="middle" style={{ height: "100vh" }}>
-      <Grid.Column style={{ maxWidth: 450 }}>
+      <Grid.Column style={{ maxWidth: 550 }}>
+        <h1>Welcome!</h1>
         <Header as="h2" color="violet" textAlign="center">
-          Welcome! Login by reigstering as a Guest below.
+          Login by clicking the button bellow.
         </Header>
         <Form size="large">
           <Segment stacked>
