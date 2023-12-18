@@ -31,7 +31,11 @@ export const ColumnDisplay = (props: Props) => {
       {data.map((displayData: DisplayData) => (
         <Grid.Column key={displayData.id}>
           <Card.Group>
-            <Link to={``}>
+            <Link
+              to={`/${
+                displayType === DisplayType.Movies ? "movie" : "tvshow"
+              }/${displayData.id}`}
+            >
               <Card
                 fluid
                 image={`https://image.tmdb.org/t/p/original/${displayData.poster_path}
