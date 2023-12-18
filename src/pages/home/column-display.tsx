@@ -1,6 +1,9 @@
-import { Grid, Card } from "semantic-ui-react";
+import { Grid, Card, Form } from "semantic-ui-react";
 import { DisplayType } from ".";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { rateMovie, rateTvShow } from "./mutation";
 
 interface DisplayData {
   id: number;
@@ -19,6 +22,20 @@ interface Props {
 
 export const ColumnDisplay = (props: Props) => {
   const { data, displayType } = props;
+  const [rating, setRating] = useState<number>(0);
+
+  const { mutate: rateMovieMutation } = useMutation({
+    mutationKey: ["ratedMovie"],
+    mutationFn: (id: number) => rateMovie(id, rating),
+  });
+
+  const { mutate: rateTvShowMutation } = useMutation({
+    mutationKey: ["ratedTvShow"],
+    mutationFn: (id: number) => rateTvShow(id, rating),
+  });
+
+  const rate =
+    displayType === DisplayType.Movies ? rateMovieMutation : rateTvShowMutation;
 
   return (
     <Grid
@@ -49,6 +66,27 @@ export const ColumnDisplay = (props: Props) => {
                 description={displayData.overview.slice(0, 350) + "..."}
               />
             </Link>
+
+            <Form style={{ marginTop: 10 }}>
+              <Form.Group inline>
+                <Form.Field>
+                  <Form.Input
+                    type="number"
+                    min="0"
+                    max="10"
+                    step="0.5"
+                    onChange={(e) => setRating(Number(e.target.value))}
+                    action={{
+                      color: "violet",
+                      labelPosition: "right",
+                      icon: "star",
+                      content: "rate",
+                      onClick: () => rate(displayData.id),
+                    }}
+                  ></Form.Input>
+                </Form.Field>
+              </Form.Group>
+            </Form>
           </Card.Group>
         </Grid.Column>
       ))}
