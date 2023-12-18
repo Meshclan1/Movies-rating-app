@@ -4,6 +4,7 @@ export const rateMovie = async (movieId: number, rating: number) => {
       "guest_session_id"
     )}&api_key=${import.meta.env.VITE_API_KEY}`,
     {
+      method: "POST",
       headers: {
         accept: "application/json",
         "content-type": "application/json;charset=utf-8",
