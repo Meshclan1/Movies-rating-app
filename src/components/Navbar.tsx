@@ -7,7 +7,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem("guest_session_ud");
+    localStorage.removeItem("guest_session_id");
     navigate("/auth");
   };
 
@@ -27,11 +27,11 @@ export const Navbar = () => {
             style={{ fontSize: "1.5rem" }}
             onClick={logout}
           >
-            Logout
+            Logout 👋
           </Menu.Item>
         ) : (
           <Menu.Item as={Link} to="/auth" style={{ fontSize: "1.5rem" }}>
-            Auth
+            Auth Page 👋
           </Menu.Item>
         )}
       </Menu.Menu>

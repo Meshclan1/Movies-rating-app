@@ -17,7 +17,6 @@ interface DisplayData {
   release_date: string;
   rating?: number;
 }
-
 interface Props {
   data: DisplayData[];
   displayType: DisplayType;
@@ -82,14 +81,13 @@ export const ColumnDisplay = (props: Props) => {
                 meta={`Release Date: ${displayData.release_date} | ${displayData.vote_average}`}
                 description={displayData.overview.slice(0, 350) + "..."}
               />
+              {isRated && (
+                <Label style={{ marginTop: 10 }} color="green">
+                  {" "}
+                  Your Rating: {displayData?.rating}{" "}
+                </Label>
+              )}
             </Link>
-
-            {isRated && (
-              <Label style={{ marginTop: 10 }} color="green">
-                {" "}
-                Your Rating: {displayData.rating}{" "}
-              </Label>
-            )}
 
             <Form style={{ marginTop: 10 }}>
               <Form.Group inline>
@@ -107,7 +105,7 @@ export const ColumnDisplay = (props: Props) => {
                       content: "Rate",
                       onClick: () => rate(displayData.id),
                     }}
-                  ></Form.Input>
+                  />
                 </Form.Field>
               </Form.Group>
             </Form>
