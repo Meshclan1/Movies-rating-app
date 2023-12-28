@@ -1,4 +1,7 @@
 export const fetchRatedMovies = async () => {
+  const apiKey = import.meta.env.VITE_API_KEY;
+  console.log("API Key:", apiKey);
+
   const res = await fetch(
     `https://api.themoviedb.org/3/guest_session/${localStorage.getItem(
       "guest_session_id"
