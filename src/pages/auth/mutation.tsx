@@ -5,9 +5,12 @@ export const mutationLogin = async () => {
       headers: {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDk1NDUxZTg5YzFiNDZhMWI1ODA5YmRjNDYxYzkwMSIsInN1YiI6IjY1NzFjNTk5YTIyZDNlMDBjNGM1MjRmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HScLcHRdMK4E-ofoZfMks8fqOAepeBe3DWxU8ZhO-0U",
+        accept: "application/json",
       },
     }
   );
+  const data = await res.json();
 
-  return res.json();
+  console.log(data);
+  return data;
 };
