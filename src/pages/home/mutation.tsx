@@ -5,7 +5,7 @@ export const rateMovie = async (movieId: number, rating: number) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${movieId}/rating?guest_session_id=${localStorage.getItem(
       "guest_session_id"
-    )}&api_key=${import.meta.env.VITE_API_KEY}`,
+    )}&api_key=0d95451e89c1b46a1b5809bdc461c901`,
     {
       method: "POST",
       headers: {
